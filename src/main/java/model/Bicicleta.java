@@ -6,20 +6,26 @@ public class Bicicleta {
     private String marca;
     private String color;
     private String tamaño;
+    private Double precio;
+    private Integer estado;
 
-    public Bicicleta(String codigo, String marca, String color, String tamaño) {
+    public Bicicleta(String codigo, String marca, String color, String tamaño, Double precio, Integer estado) {
         this.codigo = codigo;
         this.marca = marca;
         this.color = color;
         this.tamaño = tamaño;
+        this.precio = precio;
+        this.estado = estado;
     }
 
-    public Bicicleta(Integer id_bicicleta, String codigo, String marca, String color, String tamaño) {
+    public Bicicleta(Integer id_bicicleta, String codigo, String marca, String color, String tamaño, Double precio, Integer estado) {
         this.id_bicicleta = id_bicicleta;
         this.codigo = codigo;
         this.marca = marca;
         this.color = color;
         this.tamaño = tamaño;
+        this.precio = precio;
+        this.estado = estado;
     }
 
     public Integer getId_bicicleta() {
@@ -40,5 +46,17 @@ public class Bicicleta {
 
     public String getTamaño() {
         return tamaño;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public String getEstadoTexto() {
+        return estado == 1 ? "Disponible" : "No Disponible";
     }
 }

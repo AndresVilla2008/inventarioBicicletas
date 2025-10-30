@@ -12,7 +12,7 @@ import model.Bicicleta;
 
 public class BicicletaRepository {
     public void insertarBicicleta(Bicicleta bici) {
-        String sql = "INSERT INTO bicicleta (codigo, marca, color, tamaño) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO bicicleta (codigo, marca, color, tamaño, precio, estado) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = Conexion.getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -20,6 +20,8 @@ public class BicicletaRepository {
             preparedStatement.setString(2, bici.getMarca());
             preparedStatement.setString(3, bici.getColor());
             preparedStatement.setString(4, bici.getTamaño());
+            preparedStatement.setDouble(5, bici.getPrecio());
+            preparedStatement.setInt(6, bici.getEstado());
             preparedStatement.execute();
             System.out.println("Bicicleta insertada correctamente");
         } catch (Exception e) {
@@ -29,7 +31,7 @@ public class BicicletaRepository {
 
     public List<Bicicleta> listarBicicletas() {
         List<Bicicleta> bicicletas = new ArrayList<>();
-        String sql = "SELECT id_bicicleta, codigo, marca, color, tamaño FROM bicicleta";
+        String sql = "SELECT id_bicicleta, codigo, marca, color, tamaño, precio, estado FROM bicicleta";
 
         try (Connection conn = Conexion.getConnection();
              Statement stmt = conn.createStatement();
@@ -41,7 +43,9 @@ public class BicicletaRepository {
                         resultSet.getString("codigo"),
                         resultSet.getString("marca"),
                         resultSet.getString("color"),
-                        resultSet.getString("tamaño")
+                        resultSet.getString("tamaño"),
+                        resultSet.getDouble("precio"),
+                        resultSet.getInt("estado")
                 );
                 bicicletas.add(b);
             }
@@ -66,7 +70,9 @@ public class BicicletaRepository {
                         resultSet.getString("codigo"),
                         resultSet.getString("marca"),
                         resultSet.getString("color"),
-                        resultSet.getString("tamaño")
+                        resultSet.getString("tamaño"),
+                        resultSet.getDouble("precio"),
+                        resultSet.getInt("estado")
                 );
             }
         } catch (Exception e) {
@@ -94,7 +100,7 @@ public class BicicletaRepository {
     }
 
     public static void actualizarBicicleta(Bicicleta bici) {
-        String sql = "UPDATE bicicleta SET codigo = ?, marca = ?, color = ?, tamaño = ? WHERE id_bicicleta = ?";
+        String sql = "UPDATE bicicleta SET codigo = ?, marca = ?, color = ?, tamaño = ?, precio = ?, estado = ? WHERE id_bicicleta = ?";
 
         try (Connection conn = Conexion.getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -102,7 +108,9 @@ public class BicicletaRepository {
             preparedStatement.setString(2, bici.getMarca());
             preparedStatement.setString(3, bici.getColor());
             preparedStatement.setString(4, bici.getTamaño());
-            preparedStatement.setInt(5, bici.getId_bicicleta());
+            preparedStatement.setDouble(5, bici.getPrecio());
+            preparedStatement.setInt(6, bici.getEstado());
+            preparedStatement.setInt(7, bici.getId_bicicleta());
 
             Integer resultSet = preparedStatement.executeUpdate();
             if (resultSet > 0) {

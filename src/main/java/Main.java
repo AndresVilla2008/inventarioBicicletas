@@ -34,7 +34,15 @@ public class Main {
                     System.out.print("Ingrese tamaño: ");
                     String tamaño = scanner.nextLine();
 
-                    Bicicleta bici = new Bicicleta(codigo, marca, color, tamaño);
+                    System.out.print("Ingrese precio: ");
+                    Double precio = scanner.nextDouble();
+                    scanner.nextLine();
+
+                    System.out.print("Ingrese estado (1: Disponible, 2: No Disponible): ");
+                    Integer estado = scanner.nextInt();
+                    scanner.nextLine();
+
+                    Bicicleta bici = new Bicicleta(codigo, marca, color, tamaño, precio, estado);
                     bicicletaRepo.insertarBicicleta(bici);
                     break;
 
@@ -45,7 +53,9 @@ public class Main {
                                 ", Código: " + b.getCodigo() +
                                 ", Marca: " + b.getMarca() +
                                 ", Color: " + b.getColor() +
-                                ", Tamaño: " + b.getTamaño());
+                                ", Tamaño: " + b.getTamaño() +
+                                ", Precio: $" + b.getPrecio() +
+                                ", Estado: " + b.getEstadoTexto());
                     }
                     break;
 
@@ -60,7 +70,9 @@ public class Main {
                                 ", Código: " + bicicletaEncontrada.getCodigo() +
                                 ", Marca: " + bicicletaEncontrada.getMarca() +
                                 ", Color: " + bicicletaEncontrada.getColor() +
-                                ", Tamaño: " + bicicletaEncontrada.getTamaño());
+                                ", Tamaño: " + bicicletaEncontrada.getTamaño() +
+                                ", Precio: $" + bicicletaEncontrada.getPrecio() +
+                                ", Estado: " + bicicletaEncontrada.getEstadoTexto());
                     } else {
                         System.out.println("Bicicleta no encontrada.");
                     }
@@ -88,8 +100,16 @@ public class Main {
 
                     System.out.print("Ingrese el nuevo tamaño: ");
                     String nuevoTamaño = scanner.nextLine();
+
+                    System.out.print("Ingrese el nuevo precio: ");
+                    Double nuevoPrecio = scanner.nextDouble();
+                    scanner.nextLine();
+
+                    System.out.print("Ingrese el nuevo estado (1: Disponible, 2: No Disponible): ");
+                    Integer nuevoEstado = scanner.nextInt();
+                    scanner.nextLine();
                     
-                    Bicicleta bicicletaActualizar = new Bicicleta(actualizarId, nuevoCodigo, nuevaMarca, nuevoColor, nuevoTamaño);
+                    Bicicleta bicicletaActualizar = new Bicicleta(actualizarId, nuevoCodigo, nuevaMarca, nuevoColor, nuevoTamaño, nuevoPrecio, nuevoEstado);
                     BicicletaRepository.actualizarBicicleta(bicicletaActualizar);
                     break;
                     
